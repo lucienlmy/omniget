@@ -74,7 +74,7 @@ fn build_client(token: &str, api_key: &str, origin: &str) -> anyhow::Result<reqw
         HeaderValue::from_static("application/json, text/plain, */*"),
     );
 
-    let client = omniget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
+    let client = libreget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
         .user_agent(USER_AGENT)
         .default_headers(headers)
         .redirect(reqwest::redirect::Policy::limited(10))
@@ -94,8 +94,7 @@ pub fn build_client_with_origin(
 }
 
 fn session_file_path() -> anyhow::Result<PathBuf> {
-    let data_dir = dirs::data_dir().ok_or_else(|| anyhow!("Could not find app data directory"))?;
-    Ok(data_dir.join("omniget").join("medcel_session.json"))
+    crate::platforms::session_file("medcel_session.json")
 }
 
 pub async fn authenticate(
@@ -104,7 +103,7 @@ pub async fn authenticate(
     api_key: &str,
 ) -> anyhow::Result<MedcelSession> {
     let temp_client =
-        omniget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
+        libreget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
             .user_agent(USER_AGENT)
             .connect_timeout(Duration::from_secs(30))
             .timeout(Duration::from_secs(60))

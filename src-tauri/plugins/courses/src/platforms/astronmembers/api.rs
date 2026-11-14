@@ -54,7 +54,7 @@ fn build_client(cookies: &str, site_url: &str) -> anyhow::Result<reqwest::Client
         HeaderValue::from_static("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"),
     );
 
-    let client = omniget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
+    let client = libreget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
         .user_agent(USER_AGENT)
         .default_headers(headers)
         .redirect(reqwest::redirect::Policy::limited(10))
@@ -66,8 +66,7 @@ fn build_client(cookies: &str, site_url: &str) -> anyhow::Result<reqwest::Client
 }
 
 fn session_file_path() -> anyhow::Result<PathBuf> {
-    let data_dir = dirs::data_dir().ok_or_else(|| anyhow!("Could not find app data directory"))?;
-    Ok(data_dir.join("omniget").join("astron_session.json"))
+    crate::platforms::session_file("astron_session.json")
 }
 
 pub async fn authenticate(
@@ -76,7 +75,7 @@ pub async fn authenticate(
     password: &str,
 ) -> anyhow::Result<AstronSession> {
     let temp_client =
-        omniget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
+        libreget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
             .user_agent(USER_AGENT)
             .cookie_store(true)
             .redirect(reqwest::redirect::Policy::limited(10))

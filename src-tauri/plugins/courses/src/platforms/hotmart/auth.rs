@@ -27,8 +27,7 @@ pub struct SavedSession {
 }
 
 fn session_file_path() -> anyhow::Result<PathBuf> {
-    let data_dir = dirs::data_dir().ok_or_else(|| anyhow!("Could not find app data directory"))?;
-    Ok(data_dir.join("omniget").join("hotmart_session.json"))
+    crate::platforms::session_file("hotmart_session.json")
 }
 
 pub fn build_client_from_saved(saved: &SavedSession) -> anyhow::Result<reqwest::Client> {
@@ -68,7 +67,7 @@ pub fn build_client_from_saved(saved: &SavedSession) -> anyhow::Result<reqwest::
     default_headers.insert("Pragma", HeaderValue::from_static("no-cache"));
     default_headers.insert("cache-control", HeaderValue::from_static("no-cache"));
 
-    let client = omniget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
+    let client = libreget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
         .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
         .cookie_provider(Arc::new(jar))
         .default_headers(default_headers)
@@ -268,7 +267,7 @@ async fn extract_webview_cookies_js(
 
     window
         .eval(
-            "window.location.href = 'https://omniget-cookie-extract.local/?cookies=' + encodeURIComponent(document.cookie)",
+            "window.location.href = 'https://libreget-cookie-extract.local/?cookies=' + encodeURIComponent(document.cookie)",
         )
         .map_err(|e| anyhow!("JS eval failed: {}", e))?;
 
@@ -387,7 +386,7 @@ pub async fn authenticate(
 
         #[cfg(not(windows))]
         {
-            if host == "omniget-cookie-extract.local" {
+            if host == "libreget-cookie-extract.local" {
                 for (key, value) in url.query_pairs() {
                     if key == "cookies" {
                         *cookie_data_nav.lock().unwrap() = Some(value.to_string());

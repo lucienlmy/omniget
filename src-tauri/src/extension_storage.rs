@@ -344,13 +344,13 @@ pub fn read_extension_metadata(url: &str) -> Option<ExtensionMetadata> {
 
 /// Best-effort removal of the native-messaging artefacts left behind by the
 /// pre-0.5.3 builds: the Chrome / Firefox host manifests and the copied
-/// `omniget-native-host` binary that lived under `chrome-native-host/`.
+/// native host binary that lived under `chrome-native-host/`.
 ///
 /// We can't unregister the manifest atomically across all browsers — the
 /// best we can do is delete the files and let Chrome / Firefox skip them
 /// silently the next time they look for a host.
 pub fn cleanup_legacy_native_messaging() {
-    let host_names = ["com.openselena.omniget"];
+    let host_names = ["com.openselena.libreget"];
 
     if let Some(data_dir) = crate::core::paths::app_data_dir() {
         let dir = data_dir.join("chrome-native-host");
@@ -463,7 +463,7 @@ mod tests {
     #[test]
     fn metadata_map_roundtrip_preserves_multiple_urls() {
         let tmp = std::env::temp_dir().join(format!(
-            "omniget-meta-test-{}.json",
+            "libreget-meta-test-{}.json",
             current_unix_timestamp()
         ));
         let _ = fs::remove_file(&tmp);
@@ -501,7 +501,7 @@ mod tests {
     #[test]
     fn write_empty_metadata_map_removes_file() {
         let tmp = std::env::temp_dir().join(format!(
-            "omniget-meta-empty-{}.json",
+            "libreget-meta-empty-{}.json",
             current_unix_timestamp()
         ));
         fs::write(&tmp, "{}").unwrap();

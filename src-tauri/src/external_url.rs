@@ -56,7 +56,7 @@ pub fn is_external_url(value: &str) -> bool {
         .unwrap_or(false)
 }
 
-/// Returns true when the request originated from the `omniget://` protocol
+/// Returns true when the request originated from the `libreget://` protocol
 /// handler — either via the deep-link event or because the raw URL still
 /// carries the scheme prefix when handed to the second-instance callback.
 ///
@@ -66,14 +66,15 @@ pub fn is_external_url(value: &str) -> bool {
 /// the native host entirely, so we treat scheme arrival as the user's
 /// explicit intent.
 pub fn arrived_via_scheme(raw_url: &str, source: &str) -> bool {
-    raw_url.trim_start().starts_with("omniget:") || source == "deep-link"
+    let t = raw_url.trim_start();
+    t.starts_with("libreget:") || source == "deep-link"
 }
 
 pub fn normalize_external_url(value: &str) -> Option<String> {
     let trimmed = value.trim();
     let rest = trimmed
-        .strip_prefix("omniget://")
-        .or_else(|| trimmed.strip_prefix("omniget:"))?;
+        .strip_prefix("libreget://")
+        .or_else(|| trimmed.strip_prefix("libreget:"))?;
     let rest = rest.trim_start_matches('/');
     if rest.is_empty() {
         return None;
@@ -373,11 +374,11 @@ where
     I: IntoIterator<Item = S>,
     S: AsRef<str>,
 {
-    // Return the raw argument (preserving any `omniget://` prefix). The caller
+    // Return the raw argument (preserving any `libreget://` prefix). The caller
     // forwards this string to `handle_external_url`, which normalises it after
     // recording whether the request arrived through the scheme — preserving
     // the prefix is what lets that detection work on Linux's single-instance
-    // path, where the OS hands us the omniget:// URL as a plain CLI argument.
+    // path, where the OS hands us the libreget:// URL as a plain CLI argument.
     args.into_iter()
         .map(|arg| arg.as_ref().trim().to_string())
         .find(|arg| is_external_url(arg))
@@ -407,9 +408,9 @@ mod tests {
     use super::*;
 
     #[test]
-    fn normalize_strips_omniget_prefix_and_adds_https() {
+    fn normalize_strips_libreget_prefix_and_adds_https() {
         assert_eq!(
-            normalize_external_url("omniget://www.youtube.com/watch?v=abc"),
+            normalize_external_url("libreget://www.youtube.com/watch?v=abc"),
             Some("https://www.youtube.com/watch?v=abc".to_string())
         );
     }
@@ -417,7 +418,7 @@ mod tests {
     #[test]
     fn normalize_preserves_explicit_http_inside_scheme_payload() {
         assert_eq!(
-            normalize_external_url("omniget://https://example.com/v"),
+            normalize_external_url("libreget://https://example.com/v"),
             Some("https://example.com/v".to_string())
         );
     }
@@ -425,7 +426,7 @@ mod tests {
     #[test]
     fn normalize_preserves_magnet_payload() {
         assert_eq!(
-            normalize_external_url("omniget:magnet:?xt=urn:btih:abc"),
+            normalize_external_url("libreget:magnet:?xt=urn:btih:abc"),
             Some("magnet:?xt=urn:btih:abc".to_string())
         );
     }
@@ -439,14 +440,17 @@ mod tests {
     #[test]
     fn arrived_via_scheme_detects_prefix() {
         assert!(arrived_via_scheme(
-            "omniget://www.youtube.com/watch?v=abc",
+            "libreget://www.youtube.com/watch?v=abc",
             "command-line"
         ));
         assert!(arrived_via_scheme(
-            "  omniget://example.com/v",
+            "  libreget://example.com/v",
             "command-line"
         ));
-        assert!(arrived_via_scheme("omniget:magnet:?xt=foo", "command-line"));
+        assert!(arrived_via_scheme(
+            "libreget:magnet:?xt=foo",
+            "command-line"
+        ));
     }
 
     #[test]
@@ -466,13 +470,13 @@ mod tests {
     }
 
     #[test]
-    fn find_external_url_arg_preserves_omniget_prefix() {
+    fn find_external_url_arg_preserves_libreget_prefix() {
         // The single-instance / cold-start callbacks rely on this so the
         // downstream `arrived_via_scheme` check can still detect the scheme.
-        let args = vec!["--flag", "omniget://www.youtube.com/watch?v=abc"];
+        let args = vec!["--flag", "libreget://www.youtube.com/watch?v=abc"];
         assert_eq!(
             find_external_url_arg(args.iter().copied()),
-            Some("omniget://www.youtube.com/watch?v=abc".to_string())
+            Some("libreget://www.youtube.com/watch?v=abc".to_string())
         );
     }
 

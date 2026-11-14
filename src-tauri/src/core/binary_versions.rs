@@ -16,13 +16,13 @@ use std::path::{Path, PathBuf};
 /// hoje quebrou, volto para a de ontem) sem virar acumulo de 100 MB.
 pub const KEEP_VERSIONS: usize = 3;
 
-const SUFFIX: &str = ".omniget-prev.";
+const SUFFIX: &str = ".libreget-prev.";
 
 /// Caminho de arquivamento de `binary`, carimbado.
 ///
 /// O carimbo vai no fim e nao no meio do nome para o `find_tool` continuar
 /// enxergando so o binario ativo: ele procura por nome exato, e um `yt-dlp`
-/// arquivado como `yt-dlp.omniget-prev.123` nao colide.
+/// arquivado como `yt-dlp.libreget-prev.123` nao colide.
 pub fn archive_path(binary: &Path, stamp_ms: u128) -> PathBuf {
     let name = binary
         .file_name()
@@ -117,7 +117,7 @@ mod tests {
 
     fn tmp(nome: &str) -> PathBuf {
         let d = std::env::temp_dir().join(format!(
-            "omniget-bv-{nome}-{}",
+            "libreget-bv-{nome}-{}",
             std::time::SystemTime::now()
                 .duration_since(std::time::UNIX_EPOCH)
                 .unwrap()
@@ -133,15 +133,15 @@ mod tests {
         let p = archive_path(Path::new("/bin/yt-dlp"), 1234);
         assert_eq!(
             p.file_name().unwrap().to_str().unwrap(),
-            "yt-dlp.omniget-prev.1234"
+            "yt-dlp.libreget-prev.1234"
         );
         assert_ne!(p.file_name().unwrap(), "yt-dlp");
         assert_eq!(
-            parse_archive("yt-dlp.omniget-prev.1234", "yt-dlp"),
+            parse_archive("yt-dlp.libreget-prev.1234", "yt-dlp"),
             Some(1234)
         );
         assert_eq!(parse_archive("yt-dlp", "yt-dlp"), None);
-        assert_eq!(parse_archive("ffmpeg.omniget-prev.1", "yt-dlp"), None);
+        assert_eq!(parse_archive("ffmpeg.libreget-prev.1", "yt-dlp"), None);
     }
 
     #[test]
@@ -167,7 +167,7 @@ mod tests {
     fn a_poda_mantem_exatamente_as_n_mais_novas() {
         let arch: Vec<(u128, PathBuf)> = (1..=6)
             .rev()
-            .map(|i| (i as u128, PathBuf::from(format!("/x/b.omniget-prev.{i}"))))
+            .map(|i| (i as u128, PathBuf::from(format!("/x/b.libreget-prev.{i}"))))
             .collect();
         let apagar = prune_list(&arch, 3);
         assert_eq!(apagar.len(), 3);
@@ -224,11 +224,11 @@ mod tests {
         std::fs::write(&intruso, "malicioso").unwrap();
         assert!(rollback_to(&bin, &intruso).is_err());
 
-        let de_outro = dir.join("ffmpeg.omniget-prev.1");
+        let de_outro = dir.join("ffmpeg.libreget-prev.1");
         std::fs::write(&de_outro, "outro binario").unwrap();
         assert!(rollback_to(&bin, &de_outro).is_err());
 
-        let fora = std::env::temp_dir().join("yt-dlp.omniget-prev.9");
+        let fora = std::env::temp_dir().join("yt-dlp.libreget-prev.9");
         std::fs::write(&fora, "de fora").unwrap();
         assert!(
             rollback_to(&bin, &fora).is_err(),

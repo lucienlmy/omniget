@@ -97,7 +97,7 @@ fn build_client(token: &str, subdomain: &str, origin_url: &str) -> anyhow::Resul
         HeaderValue::from_str(&format!("{}/", origin_url))?,
     );
 
-    let client = omniget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
+    let client = libreget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
         .user_agent(USER_AGENT)
         .default_headers(headers)
         .redirect(reqwest::redirect::Policy::limited(10))
@@ -109,8 +109,7 @@ fn build_client(token: &str, subdomain: &str, origin_url: &str) -> anyhow::Resul
 }
 
 fn session_file_path() -> anyhow::Result<PathBuf> {
-    let data_dir = dirs::data_dir().ok_or_else(|| anyhow!("Could not find app data directory"))?;
-    Ok(data_dir.join("omniget").join("alpaclass_session.json"))
+    crate::platforms::session_file("alpaclass_session.json")
 }
 
 pub async fn authenticate(token: &str, platform_url: &str) -> anyhow::Result<AlpaclassSession> {

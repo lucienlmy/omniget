@@ -47,42 +47,42 @@ jobs:
           set -euo pipefail
           version="${TAG#v}"
           base="https://github.com/$REPO/releases/download/$TAG"
-          curl -fsSL -o arm.dmg "$base/omniget_${version}_aarch64.dmg"
-          curl -fsSL -o intel.dmg "$base/omniget_${version}_x64.dmg"
+          curl -fsSL -o arm.dmg "$base/libreget_${version}_aarch64.dmg"
+          curl -fsSL -o intel.dmg "$base/libreget_${version}_x64.dmg"
           arm_sha=$(sha256sum arm.dmg | cut -d' ' -f1)
           intel_sha=$(sha256sum intel.dmg | cut -d' ' -f1)
           mkdir -p tap/Casks
-          cask=tap/Casks/omniget.rb
+          cask=tap/Casks/libreget.rb
           {
-            echo 'cask "omniget" do'
+            echo 'cask "libreget" do'
             echo "  version \"$version\""
             echo ""
             echo "  on_arm do"
-            echo "    url \"https://github.com/$REPO/releases/download/$TAG/omniget_#{version}_aarch64.dmg\""
+            echo "    url \"https://github.com/$REPO/releases/download/$TAG/libreget_#{version}_aarch64.dmg\""
             echo "    sha256 \"$arm_sha\""
             echo "  end"
             echo "  on_intel do"
-            echo "    url \"https://github.com/$REPO/releases/download/$TAG/omniget_#{version}_x64.dmg\""
+            echo "    url \"https://github.com/$REPO/releases/download/$TAG/libreget_#{version}_x64.dmg\""
             echo "    sha256 \"$intel_sha\""
             echo "  end"
             echo ""
-            echo "  name \"OmniGet\""
+            echo "  name \"LibreGet\""
             echo "  desc \"Universal downloader and media workstation\""
             echo "  homepage \"https://github.com/$REPO\""
             echo ""
-            echo "  app \"omniget.app\""
+            echo "  app \"LibreGet.app\""
             echo ""
             echo "  zap trash: ["
-            echo "    \"~/Library/Application Support/com.openselena.omniget\","
-            echo "    \"~/Library/Caches/com.openselena.omniget\","
+            echo "    \"~/Library/Application Support/com.openselena.libreget\","
+            echo "    \"~/Library/Caches/com.openselena.libreget\","
             echo "  ]"
             echo "end"
           } > "$cask"
           cd tap
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Casks/omniget.rb
+          git add Casks/libreget.rb
           git diff --cached --quiet && { echo "cask already at $version"; exit 0; }
-          git commit -m "omniget $version"
+          git commit -m "libreget $version"
           git push
 

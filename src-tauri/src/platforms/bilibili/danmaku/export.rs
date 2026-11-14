@@ -8,7 +8,7 @@
 use std::path::PathBuf;
 
 use anyhow::{anyhow, Result};
-use omniget_core::core::tools::{report, ProgressFn};
+use libreget_core::core::tools::{report, ProgressFn};
 use serde::{Deserialize, Serialize};
 
 use super::super::api::{ApiClient, BilibiliError};
@@ -426,11 +426,11 @@ mod tests {
     }
 
     /// Puxa um vídeo público de verdade e grava os três formatos.
-    /// `cargo test -p omniget --lib -- --ignored live_danmaku_export`
+    /// `cargo test -p libreget --lib -- --ignored live_danmaku_export`
     #[tokio::test]
     #[ignore]
     async fn live_danmaku_export_writes_the_three_formats() {
-        let dir = std::env::temp_dir().join("omniget-danmaku-live");
+        let dir = std::env::temp_dir().join("libreget-danmaku-live");
         let _ = std::fs::remove_dir_all(&dir);
         let opts = ExportOptions {
             url: "https://www.bilibili.com/video/BV1xx411c7mu".into(),
@@ -440,7 +440,7 @@ mod tests {
             style: AssRenderOptions::default(),
             output_dir: dir.to_string_lossy().to_string(),
         };
-        let res = run(&opts, &omniget_core::core::tools::noop_progress())
+        let res = run(&opts, &libreget_core::core::tools::noop_progress())
             .await
             .unwrap();
         eprintln!(
@@ -471,7 +471,7 @@ mod tests {
             },
             ..opts
         };
-        let res2 = run(&filtrado, &omniget_core::core::tools::noop_progress())
+        let res2 = run(&filtrado, &libreget_core::core::tools::noop_progress())
             .await
             .unwrap();
         assert_eq!(res2.files.len(), 1);

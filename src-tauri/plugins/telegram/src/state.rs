@@ -195,22 +195,22 @@ pub struct TelegramStreamInfo {
     pub base_url: String,
 }
 
-pub fn omniget_data_dir() -> PathBuf {
-    dirs::data_dir()
-        .unwrap_or_else(|| PathBuf::from("."))
-        .join("omniget")
+pub fn libreget_data_dir() -> PathBuf {
+    let base = dirs::data_dir().unwrap_or_else(|| PathBuf::from("."));
+    base.join("libreget")
 }
 
 pub fn persistent_state_path() -> PathBuf {
-    omniget_data_dir().join("telegram_plugin_state.json")
+    let base = dirs::data_dir().unwrap_or_else(|| PathBuf::from("."));
+    base.join("libreget").join("telegram_plugin_state.json")
 }
 
 pub fn accounts_dir() -> PathBuf {
-    omniget_data_dir().join("telegram_accounts")
+    libreget_data_dir().join("telegram_accounts")
 }
 
 pub fn backups_dir() -> PathBuf {
-    omniget_data_dir().join("telegram_backups")
+    libreget_data_dir().join("telegram_backups")
 }
 
 impl TelegramPersistentData {

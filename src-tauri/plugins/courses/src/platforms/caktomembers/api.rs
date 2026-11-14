@@ -62,7 +62,7 @@ fn build_client(access_token: &str) -> anyhow::Result<reqwest::Client> {
         HeaderValue::from_static("https://app.cakto.com.br/"),
     );
 
-    let client = omniget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
+    let client = libreget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
         .user_agent(USER_AGENT)
         .default_headers(headers)
         .redirect(reqwest::redirect::Policy::limited(10))
@@ -81,7 +81,7 @@ fn build_cookie_client(cookie: &str) -> anyhow::Result<reqwest::Client> {
     );
     headers.insert("Accept", HeaderValue::from_static("application/json"));
 
-    let client = omniget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
+    let client = libreget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
         .user_agent(USER_AGENT)
         .default_headers(headers)
         .redirect(reqwest::redirect::Policy::limited(10))
@@ -93,8 +93,7 @@ fn build_cookie_client(cookie: &str) -> anyhow::Result<reqwest::Client> {
 }
 
 fn session_file_path() -> anyhow::Result<PathBuf> {
-    let data_dir = dirs::data_dir().ok_or_else(|| anyhow!("Could not find app data directory"))?;
-    Ok(data_dir.join("omniget").join("caktomembers_session.json"))
+    crate::platforms::session_file("caktomembers_session.json")
 }
 
 pub async fn fetch_access_token(cookie: &str) -> anyhow::Result<String> {

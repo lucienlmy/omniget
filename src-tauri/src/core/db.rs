@@ -3,10 +3,11 @@ use std::sync::{Mutex, OnceLock};
 
 use rusqlite::Connection;
 
-const DB_FILE: &str = "omniget.db";
+const DB_FILE: &str = "libreget.db";
 
 fn db_path() -> Option<PathBuf> {
-    crate::core::paths::app_data_dir().map(|d| d.join(DB_FILE))
+    let dir = crate::core::paths::app_data_dir()?;
+    Some(dir.join(DB_FILE))
 }
 
 fn open() -> Option<Connection> {

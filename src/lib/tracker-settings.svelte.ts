@@ -1,4 +1,4 @@
-const STORAGE_KEY = "omniget.tracking.settings";
+const STORAGE_KEY = "libreget.tracking.settings";
 
 export type TrackerSettings = {
   notificationsEnabled: boolean;

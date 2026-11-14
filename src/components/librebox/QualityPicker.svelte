@@ -1,0 +1,134 @@
+<script lang="ts">
+  import { t } from "$lib/i18n";
+
+  let {
+    selectedQuality = $bindable("best"),
+    selectedFormatId,
+    availableHeights = null as number[] | null,
+    hasAudioOnly = false,
+  } = $props();
+
+  // Full ordered list of resolution options (label, yt-dlp quality value, height for filtering)
+  const RESOLUTION_OPTIONS = [
+    { value: "best", key: "librebox.quality_best", height: Infinity },
+    { value: "2160p", key: "librebox.quality_2160p", height: 2160 },
+    { value: "1440p", key: "librebox.quality_1440p", height: 1440 },
+    { value: "1080p", key: "librebox.quality_1080p", height: 1080 },
+    { value: "720p", key: "librebox.quality_720p", height: 720 },
+    { value: "480p", key: "librebox.quality_480p", height: 480 },
+    { value: "360p", key: "librebox.quality_360p", height: 360 },
+  ];
+
+  let visibleOptions = $derived.by(() => {
+    if (!availableHeights) {
+      return RESOLUTION_OPTIONS;
+    }
+    return RESOLUTION_OPTIONS.filter(o => {
+      if (o.height === Infinity || o.value === selectedQuality) return true;
+      return availableHeights!.some(h => h === o.height);
+    });
+  });
+
+  // i18n keys that may not exist yet — provide a fallback label
+  function qualityLabel(value: string, key: string): string {
+    const translated = $t(key);
+    // If no translation key exists (e.g. 2160p, 1440p), build a label from value
+    if (translated === key) return value;
+    return translated;
+  }
+</script>
+
+{#if !selectedFormatId}
+  <div class="quality-group">
+    <span class="quality-label">{$t('librebox.quality')}</span>
+    <div class="quality-pills">
+      {#each visibleOptions as q (q.value)}
+        <button
+          class="quality-pill"
+          class:active={selectedQuality === q.value}
+          onclick={() => { selectedQuality = q.value; }}
+        >
+          {qualityLabel(q.value, q.key)}
+        </button>
+      {/each}
+      {#if hasAudioOnly}
+        <button
+          class="quality-pill quality-pill--audio"
+          class:active={selectedQuality === "audio"}
+          onclick={() => { selectedQuality = "audio"; }}
+        >
+          {$t('librebox.quality_audio')}
+        </button>
+      {/if}
+    </div>
+    {#if availableHeights}
+      <span class="quality-hint">{$t('librebox.quality_from_formats')}</span>
+    {/if}
+  </div>
+{/if}
+
+<style>
+  .quality-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .quality-label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-dim);
+  }
+
+  .quality-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .quality-pill {
+    height: 26px;
+    padding: 0 var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--fill-1);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  }
+
+  .quality-pill.active {
+    background: var(--accent-soft);
+    color: var(--accent-hi);
+    box-shadow: inset 0 0 0 var(--hairline) color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+
+  .quality-pill--audio {
+    box-shadow: inset 0 0 0 var(--hairline) var(--content-border);
+    background: transparent;
+  }
+
+  .quality-pill--audio.active {
+    background: var(--accent-soft);
+  }
+
+  @media (hover: hover) {
+    .quality-pill:not(.active):hover {
+      background: var(--fill-2);
+      color: var(--text);
+    }
+  }
+
+  .quality-pill:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  .quality-hint {
+    font-size: var(--text-xs);
+    color: var(--text-dim);
+  }
+</style>

@@ -76,7 +76,7 @@ const SETTINGS = {
   schema_version: 1,
   appearance: { theme: "dark", language: "en" },
   download: {
-    default_output_dir: "/Users/demo/Downloads/OmniGet",
+    default_output_dir: "/Users/demo/Downloads/LibreGet",
     always_ask_path: false,
     video_quality: "1080p",
     skip_existing: true,
@@ -184,28 +184,28 @@ const PLUGINS = [
 
 const now = Math.floor(Date.now() / 1000);
 const HISTORY = [
-  { id: 101, url: "https://www.youtube.com/watch?v=abc123", platform: "youtube", title: "Building a Desktop App with Tauri 2 — Full Walkthrough", file_path: "/Users/demo/Downloads/OmniGet/YouTube/tauri-walkthrough.mp4", file_size_bytes: 734003200, total_bytes: 734003200, success: true, error: null, completed_at: now - 3600, thumbnail_url: null, kind: "video" },
-  { id: 102, url: "https://vimeo.com/9911223", platform: "vimeo", title: "Ambient Study Mix Vol. 4", file_path: "/Users/demo/Downloads/OmniGet/Vimeo/ambient-mix-4.m4a", file_size_bytes: 88080384, total_bytes: 88080384, success: true, error: null, completed_at: now - 7200, thumbnail_url: null, kind: "audio" },
+  { id: 101, url: "https://www.youtube.com/watch?v=abc123", platform: "youtube", title: "Building a Desktop App with Tauri 2 — Full Walkthrough", file_path: "/Users/demo/Downloads/LibreGet/YouTube/tauri-walkthrough.mp4", file_size_bytes: 734003200, total_bytes: 734003200, success: true, error: null, completed_at: now - 3600, thumbnail_url: null, kind: "video" },
+  { id: 102, url: "https://vimeo.com/9911223", platform: "vimeo", title: "Ambient Study Mix Vol. 4", file_path: "/Users/demo/Downloads/LibreGet/Vimeo/ambient-mix-4.m4a", file_size_bytes: 88080384, total_bytes: 88080384, success: true, error: null, completed_at: now - 7200, thumbnail_url: null, kind: "audio" },
   { id: 103, url: "https://www.instagram.com/p/Cxyz/", platform: "instagram", title: "Travel reel — Kyoto in autumn", file_path: null, file_size_bytes: null, total_bytes: null, success: false, error: "Login required: this post is from a private account", completed_at: now - 10800, thumbnail_url: null, kind: "video" },
-  { id: 104, url: "https://twitter.com/user/status/1", platform: "twitter", title: "Thread screenshots (4 images)", file_path: "/Users/demo/Downloads/OmniGet/Twitter/thread-imgs", file_size_bytes: 8388608, total_bytes: 8388608, success: true, error: null, completed_at: now - 86400, thumbnail_url: null, kind: "image" },
-  { id: 105, url: "https://www.reddit.com/r/rust/comments/xyz", platform: "reddit", title: "Why Rust for desktop apps — discussion", file_path: "/Users/demo/Downloads/OmniGet/Reddit/rust-desktop.mp4", file_size_bytes: 157286400, total_bytes: 157286400, success: true, error: null, completed_at: now - 172800, thumbnail_url: null, kind: "video" },
-  { id: 106, url: "https://www.tiktok.com/@user/video/72", platform: "tiktok", title: "60-second pasta recipe", file_path: "/Users/demo/Downloads/OmniGet/TikTok/pasta.mp4", file_size_bytes: 26214400, total_bytes: 26214400, success: true, error: null, completed_at: now - 259200, thumbnail_url: null, kind: "video" },
+  { id: 104, url: "https://twitter.com/user/status/1", platform: "twitter", title: "Thread screenshots (4 images)", file_path: "/Users/demo/Downloads/LibreGet/Twitter/thread-imgs", file_size_bytes: 8388608, total_bytes: 8388608, success: true, error: null, completed_at: now - 86400, thumbnail_url: null, kind: "image" },
+  { id: 105, url: "https://www.reddit.com/r/rust/comments/xyz", platform: "reddit", title: "Why Rust for desktop apps — discussion", file_path: "/Users/demo/Downloads/LibreGet/Reddit/rust-desktop.mp4", file_size_bytes: 157286400, total_bytes: 157286400, success: true, error: null, completed_at: now - 172800, thumbnail_url: null, kind: "video" },
+  { id: 106, url: "https://www.tiktok.com/@user/video/72", platform: "tiktok", title: "60-second pasta recipe", file_path: "/Users/demo/Downloads/LibreGet/TikTok/pasta.mp4", file_size_bytes: 26214400, total_bytes: 26214400, success: true, error: null, completed_at: now - 259200, thumbnail_url: null, kind: "video" },
 ];
 
 const QUEUE = [
-  { id: 1, url: "https://www.youtube.com/watch?v=live1", platform: "youtube", title: "Conference Keynote 2026 — Day 1 (4K)", status: { type: "Active" }, percent: 42.5, speed_bytes_per_sec: 11534336, downloaded_bytes: 891289600, total_bytes: 2097152000, file_path: null, file_size_bytes: null, file_count: null, thumbnail_url: null, eta_seconds: 105, kind: "video", author: "Devs Conf", duration_seconds: 5412, phase: "downloading_video", planned_formats: ["299", "140"], stream: { format_id: "299", height: 1080, width: 1920, fps: 60, vcodec: "avc1.64002a", acodec: "none", ext: "mp4", filesize: 2097152000, format_note: "1080p60" }, fragment_index: 12, fragment_count: 25, started_at_ms: Date.now() - 83000, command: { program: "yt-dlp", args: [], display: "yt-dlp -f 'bv*[height<=1080]+ba[ext=m4a]/bv*[height<=1080]+ba/b' --ignore-config -N 8 --extractor-args 'youtube:player_client=default;formats=dashy' --throttled-rate 100K -o '/Users/demo/Downloads/OmniGet/%(title).200s [%(id)s].%(ext)s' https://www.youtube.com/watch?v=live1", attempt: 1, max_attempts: 3, player_client: "default", connections: 8, engine: "native", overridden: false } },
+  { id: 1, url: "https://www.youtube.com/watch?v=live1", platform: "youtube", title: "Conference Keynote 2026 — Day 1 (4K)", status: { type: "Active" }, percent: 42.5, speed_bytes_per_sec: 11534336, downloaded_bytes: 891289600, total_bytes: 2097152000, file_path: null, file_size_bytes: null, file_count: null, thumbnail_url: null, eta_seconds: 105, kind: "video", author: "Devs Conf", duration_seconds: 5412, phase: "downloading_video", planned_formats: ["299", "140"], stream: { format_id: "299", height: 1080, width: 1920, fps: 60, vcodec: "avc1.64002a", acodec: "none", ext: "mp4", filesize: 2097152000, format_note: "1080p60" }, fragment_index: 12, fragment_count: 25, started_at_ms: Date.now() - 83000, command: { program: "yt-dlp", args: [], display: "yt-dlp -f 'bv*[height<=1080]+ba[ext=m4a]/bv*[height<=1080]+ba/b' --ignore-config -N 8 --extractor-args 'youtube:player_client=default;formats=dashy' --throttled-rate 100K -o '/Users/demo/Downloads/LibreGet/%(title).200s [%(id)s].%(ext)s' https://www.youtube.com/watch?v=live1", attempt: 1, max_attempts: 3, player_client: "default", connections: 8, engine: "native", overridden: false } },
   { id: 5, url: "https://vimeo.com/123456", platform: "vimeo", title: "Product walkthrough — spring release", status: { type: "Active" }, percent: 3, speed_bytes_per_sec: 0, downloaded_bytes: 0, total_bytes: null, file_path: null, file_size_bytes: null, file_count: null, thumbnail_url: null, eta_seconds: null, kind: "video", phase: "fetching_info", started_at_ms: Date.now() - 4000 },
   { id: 2, url: "https://www.twitch.tv/videos/222", platform: "twitch", title: "Speedrun VOD — GDQ finals", status: { type: "Queued" }, percent: 0, speed_bytes_per_sec: 0, downloaded_bytes: 0, total_bytes: null, file_path: null, file_size_bytes: null, file_count: null, thumbnail_url: null, eta_seconds: null },
-  { id: 3, url: "https://www.bilibili.com/video/BV1xx", platform: "bilibili", title: "Lo-fi mix for late nights", status: { type: "Complete" }, percent: 100, speed_bytes_per_sec: 0, downloaded_bytes: 104857600, total_bytes: 104857600, file_path: "/Users/demo/Downloads/OmniGet/Bilibili/lofi.mp4", file_size_bytes: 104857600, file_count: 1, thumbnail_url: null, eta_seconds: null },
-  { id: 4, url: "https://www.youtube.com/watch?v=priv1", platform: "youtube", title: "Members-only masterclass", status: { type: "Error", data: { message: "ERROR: [youtube] priv1: Private video. Sign in if you've been granted access", retryable: false } }, percent: 0, speed_bytes_per_sec: 0, downloaded_bytes: 0, total_bytes: null, file_path: null, file_size_bytes: null, file_count: null, thumbnail_url: null, eta_seconds: null, kind: "video", author: "Masterclass Co.", command: { program: "yt-dlp", args: [], display: "yt-dlp -f 'bv*+ba[ext=m4a]/bv*+ba/b' --ignore-config -N 8 --extractor-args 'youtube:player_client=ios;formats=dashy' --cookies '/Users/demo/Library/Application Support/com.openselena.omniget/cookies/youtube.txt' -o '/Users/demo/Downloads/OmniGet/%(title).200s [%(id)s].%(ext)s' https://www.youtube.com/watch?v=priv1", attempt: 3, max_attempts: 3, player_client: "ios", connections: 8, engine: "native", overridden: false } },
+  { id: 3, url: "https://www.bilibili.com/video/BV1xx", platform: "bilibili", title: "Lo-fi mix for late nights", status: { type: "Complete" }, percent: 100, speed_bytes_per_sec: 0, downloaded_bytes: 104857600, total_bytes: 104857600, file_path: "/Users/demo/Downloads/LibreGet/Bilibili/lofi.mp4", file_size_bytes: 104857600, file_count: 1, thumbnail_url: null, eta_seconds: null },
+  { id: 4, url: "https://www.youtube.com/watch?v=priv1", platform: "youtube", title: "Members-only masterclass", status: { type: "Error", data: { message: "ERROR: [youtube] priv1: Private video. Sign in if you've been granted access", retryable: false } }, percent: 0, speed_bytes_per_sec: 0, downloaded_bytes: 0, total_bytes: null, file_path: null, file_size_bytes: null, file_count: null, thumbnail_url: null, eta_seconds: null, kind: "video", author: "Masterclass Co.", command: { program: "yt-dlp", args: [], display: "yt-dlp -f 'bv*+ba[ext=m4a]/bv*+ba/b' --ignore-config -N 8 --extractor-args 'youtube:player_client=ios;formats=dashy' --cookies '/Users/demo/Library/Application Support/com.openselena.libreget/cookies/youtube.txt' -o '/Users/demo/Downloads/LibreGet/%(title).200s [%(id)s].%(ext)s' https://www.youtube.com/watch?v=priv1", attempt: 3, max_attempts: 3, player_client: "ios", connections: 8, engine: "native", overridden: false } },
 ];
 
 const REGISTRY = [
-  { id: "courses", name: "Courses", description: "Download from Hotmart, Udemy, Kiwify and Rocketseat.", author: "OpenSelena", repo: "OpenSelena/omniget-plugin-courses", homepage: null, tags: ["courses", "education"], official: true, capabilities: ["nav"], installed: true, installed_version: "1.4.0" },
-  { id: "study", name: "Study", description: "Reader, player, notes, flashcards and focus tools.", author: "OpenSelena", repo: "OpenSelena/omniget-study", homepage: null, tags: ["study", "reader"], official: true, capabilities: ["nav"], installed: true, installed_version: "2.1.0" },
-  { id: "telegram", name: "Telegram", description: "Browse and batch-download from Telegram chats.", author: "OpenSelena", repo: "OpenSelena/omniget-plugin-telegram", homepage: null, tags: ["telegram"], official: true, capabilities: ["nav"], installed: true, installed_version: "1.2.0" },
-  { id: "convert", name: "Convert", description: "FFmpeg conversions with GPU acceleration.", author: "OpenSelena", repo: "OpenSelena/omniget-plugin-convert", homepage: null, tags: ["ffmpeg", "convert"], official: true, capabilities: ["nav"], installed: true, installed_version: "1.0.3" },
-  { id: "misc", name: "Utilities", description: "Screen recording studio, file clips and media library.", author: "OpenSelena", repo: "OpenSelena/omniget-plugin-misc", homepage: null, tags: ["studio", "library"], official: true, capabilities: ["nav"], installed: false, installed_version: null },
+  { id: "courses", name: "Courses", description: "Download from Hotmart, Udemy, Kiwify and Rocketseat.", author: "OpenSelena", repo: "OpenSelena/libreget-plugin-courses", homepage: null, tags: ["courses", "education"], official: true, capabilities: ["nav"], installed: true, installed_version: "1.4.0" },
+  { id: "study", name: "Study", description: "Reader, player, notes, flashcards and focus tools.", author: "OpenSelena", repo: "OpenSelena/libreget-study", homepage: null, tags: ["study", "reader"], official: true, capabilities: ["nav"], installed: true, installed_version: "2.1.0" },
+  { id: "telegram", name: "Telegram", description: "Browse and batch-download from Telegram chats.", author: "OpenSelena", repo: "OpenSelena/libreget-plugin-telegram", homepage: null, tags: ["telegram"], official: true, capabilities: ["nav"], installed: true, installed_version: "1.2.0" },
+  { id: "convert", name: "Convert", description: "FFmpeg conversions with GPU acceleration.", author: "OpenSelena", repo: "OpenSelena/libreget-plugin-convert", homepage: null, tags: ["ffmpeg", "convert"], official: true, capabilities: ["nav"], installed: true, installed_version: "1.0.3" },
+  { id: "misc", name: "Utilities", description: "Screen recording studio, file clips and media library.", author: "OpenSelena", repo: "OpenSelena/libreget-plugin-misc", homepage: null, tags: ["studio", "library"], official: true, capabilities: ["nav"], installed: false, installed_version: null },
 ];
 
 const DEPS = [
@@ -239,7 +239,7 @@ function initScript(theme) {
         case "plugin:event|emit_to":
           return null;
         case "plugin:app|version": return "0.7.0";
-        case "plugin:app|name": return "OmniGet";
+        case "plugin:app|name": return "LibreGet";
         case "plugin:updater|check": return null;
         case "get_settings": return F.SETTINGS;
         case "save_settings": return null;
@@ -254,9 +254,9 @@ function initScript(theme) {
         case "rpc_set_idle_stats": return null;
         case "plugin_command": return null;
         case "get_download_log": return args && args.downloadId === 1
-          ? ["[omniget] $ yt-dlp -f 'bv*[height<=1080]+ba' … https://www.youtube.com/watch?v=live1", "[youtube] live1: Downloading webpage", "[info] live1: Downloading 2 format(s): 299+140", "[dashsegments] Total fragments: 25", "[download] Destination: Conference Keynote 2026.f299.mp4"]
+          ? ["[libreget] $ yt-dlp -f 'bv*[height<=1080]+ba' … https://www.youtube.com/watch?v=live1", "[youtube] live1: Downloading webpage", "[info] live1: Downloading 2 format(s): 299+140", "[dashsegments] Total fragments: 25", "[download] Destination: Conference Keynote 2026.f299.mp4"]
           : args && args.downloadId === 4
-            ? ["[omniget] $ yt-dlp -f 'bv*+ba' … https://www.youtube.com/watch?v=priv1", "ERROR: [youtube] priv1: Private video. Sign in if you've been granted access"]
+            ? ["[libreget] $ yt-dlp -f 'bv*+ba' … https://www.youtube.com/watch?v=priv1", "ERROR: [youtube] priv1: Private video. Sign in if you've been granted access"]
             : [];
         case "get_download_command": return null;
         case "retry_download_with_command": return "ok";
@@ -307,7 +307,7 @@ async function main() {
     console.log("starting vite dev...");
     devProc = spawn("pnpm", ["dev"], {
       cwd: process.cwd(),
-      env: { ...process.env, OMNIGET_I18N_STRICT: "0" },
+      env: { ...process.env, LIBREGET_I18N_STRICT: "0" },
       stdio: "ignore",
       detached: false,
     });

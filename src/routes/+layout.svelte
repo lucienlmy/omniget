@@ -333,7 +333,7 @@
 
   let { children }: { children: Snippet } = $props();
 
-  const VACUUM_LAST_RUN_KEY = "omniget.library.auto_vacuum.last_run";
+  const VACUUM_LAST_RUN_KEY = "libreget.library.auto_vacuum.last_run";
 
   async function checkAutoVacuum() {
     try {

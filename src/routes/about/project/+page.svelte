@@ -3,7 +3,7 @@
   import { getVersion } from "@tauri-apps/api/app";
   import { t } from "$lib/i18n";
 
-  const GITHUB_URL = "https://github.com/OpenSelena/omniget";
+  const GITHUB_URL = "https://github.com/OpenSelena/libreget";
   let appVersion = $state("");
 
   $effect(() => {
@@ -19,7 +19,7 @@
   <p class="star-description">{$t('about.star_description')}</p>
   <div class="star-iframe-wrapper">
     <iframe
-      src="https://ghbtns.com/github-btn.html?user=OpenSelena&repo=omniget&type=star&count=true&size=large"
+      src="https://ghbtns.com/github-btn.html?user=OpenSelena&repo=libreget&type=star&count=true&size=large"
       frameborder="0"
       scrolling="0"
       width="170"
@@ -30,7 +30,7 @@
 </section>
 
 <section class="project-header">
-  <img src="/loop.png" alt="Loop" class="project-logo" width="64" height="64" />
+  <img src="/mascot/penguin.png" alt="LibreGet Mascot" class="project-logo" width="64" height="64" />
   <p class="project-description">{$t('about.description')}</p>
 </section>
 

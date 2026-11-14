@@ -15,7 +15,7 @@
     resultCount,
   }: { query?: string; filter?: PlatformFilter; autofocus?: boolean; resultCount?: number } = $props();
 
-  const FILTER_KEY = "omniget.tools.platform_filter";
+  const FILTER_KEY = "libreget.tools.platform_filter";
   const FILTERS: { id: PlatformFilter; key: string }[] = [
     { id: "all", key: "tools.hub.filter_all" },
     { id: "cross", key: "tools.hub.filter_cross" },

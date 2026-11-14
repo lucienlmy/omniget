@@ -5,7 +5,7 @@ use tokio::sync::{mpsc, Semaphore};
 use tokio_util::sync::CancellationToken;
 
 use base64::Engine;
-use omniget_plugin_sdk::PluginHost;
+use libreget_plugin_sdk::PluginHost;
 
 use crate::platforms::telegram::api::{self, TelegramChat, TelegramMediaItem};
 use crate::platforms::telegram::auth::{self, QrPollStatus, VerifyError};
@@ -208,24 +208,24 @@ pub fn resolve_telegram_download_dir(
     chat_title: Option<&str>,
 ) -> std::path::PathBuf {
     let base = std::path::PathBuf::from(base_dir);
-    let is_already_omnigram = base
+    let is_already_folder = base
         .file_name()
         .and_then(|n| n.to_str())
-        .map(|n| n.eq_ignore_ascii_case("OmniGram"))
+        .map(|n| n.eq_ignore_ascii_case("LibreGram"))
         .unwrap_or(false);
 
-    let omnigram_root = if is_already_omnigram {
+    let libregram_root = if is_already_folder {
         base
     } else {
-        base.join("OmniGram")
+        base.join("LibreGram")
     };
 
     match chat_title {
         Some(title) if !title.trim().is_empty() => {
             let clean = sanitize_folder_name(title);
-            omnigram_root.join(clean)
+            libregram_root.join(clean)
         }
-        _ => omnigram_root,
+        _ => libregram_root,
     }
 }
 
@@ -292,7 +292,7 @@ pub async fn telegram_download_media(
             },
         );
 
-        let (tx, mut rx) = mpsc::channel::<omniget_core::models::progress::ProgressUpdate>(32);
+        let (tx, mut rx) = mpsc::channel::<libreget_core::models::progress::ProgressUpdate>(32);
 
         let host_progress = host.clone();
         let file_name_progress = file_name_clone.clone();
@@ -550,7 +550,7 @@ pub async fn telegram_download_batch(
                 );
 
                 let (tx, mut rx) =
-                    mpsc::channel::<omniget_core::models::progress::ProgressUpdate>(32);
+                    mpsc::channel::<libreget_core::models::progress::ProgressUpdate>(32);
 
                 let host_progress = host.clone();
                 let progress_forwarder = tokio::spawn(async move {
@@ -1053,7 +1053,7 @@ pub async fn telegram_clone_start(
             let created = api::create_channel_or_folder(
                 &state.telegram_session,
                 &new_title,
-                "Cloned with OmniGet",
+                "Cloned with LibreGet",
                 false,
             )
             .await
@@ -1311,13 +1311,13 @@ mod tests {
     }
 
     #[test]
-    fn test_resolve_telegram_download_dir_creates_omnigram_and_channel_folder() {
+    fn test_resolve_telegram_download_dir_creates_libregram_and_channel_folder() {
         let base = "C:/Users/mint/Downloads";
         let dir = resolve_telegram_download_dir(base, Some("Evelina Ava"));
         assert_eq!(
             dir,
             PathBuf::from("C:/Users/mint/Downloads")
-                .join("OmniGram")
+                .join("LibreGram")
                 .join("Evelina Ava")
         );
 
@@ -1325,18 +1325,18 @@ mod tests {
         assert_eq!(
             dir2,
             PathBuf::from("C:/Users/mint/Downloads")
-                .join("OmniGram")
+                .join("LibreGram")
                 .join("Ivana")
         );
     }
 
     #[test]
-    fn test_resolve_telegram_download_dir_when_base_already_omnigram() {
-        let base = "C:/Users/mint/Downloads/OmniGram";
+    fn test_resolve_telegram_download_dir_when_base_already_libregram() {
+        let base = "C:/Users/mint/Downloads/LibreGram";
         let dir = resolve_telegram_download_dir(base, Some("Evelina Ava"));
         assert_eq!(
             dir,
-            PathBuf::from("C:/Users/mint/Downloads/OmniGram").join("Evelina Ava")
+            PathBuf::from("C:/Users/mint/Downloads/LibreGram").join("Evelina Ava")
         );
     }
 
@@ -1346,13 +1346,13 @@ mod tests {
         let dir = resolve_telegram_download_dir(base, None);
         assert_eq!(
             dir,
-            PathBuf::from("C:/Users/mint/Downloads").join("OmniGram")
+            PathBuf::from("C:/Users/mint/Downloads").join("LibreGram")
         );
 
         let dir2 = resolve_telegram_download_dir(base, Some("   "));
         assert_eq!(
             dir2,
-            PathBuf::from("C:/Users/mint/Downloads").join("OmniGram")
+            PathBuf::from("C:/Users/mint/Downloads").join("LibreGram")
         );
     }
 }

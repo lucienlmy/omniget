@@ -22,14 +22,14 @@ pub fn portable_webview_dir(data_dir: Option<&Path>) -> Option<PathBuf> {
 
 /// Le o modo portatil do ambiente, do jeito que o `main.rs` o publica.
 ///
-/// Le `OMNIGET_DATA_DIR` em vez de re-detectar o `portable.txt`: a deteccao
+/// Le `LIBREGET_DATA_DIR` em vez de re-detectar o `portable.txt`: a deteccao
 /// acontece uma vez so, antes de qualquer coisa subir, e duplicar a regra aqui
 /// criaria duas fontes de verdade que divergem no primeiro ajuste.
 pub fn portable_webview_dir_from_env() -> Option<PathBuf> {
-    if std::env::var("OMNIGET_PORTABLE").ok().as_deref() != Some("1") {
+    if std::env::var("LIBREGET_PORTABLE").ok().as_deref() != Some("1") {
         return None;
     }
-    let data_dir = std::env::var("OMNIGET_DATA_DIR").ok()?;
+    let data_dir = std::env::var("LIBREGET_DATA_DIR").ok()?;
     if data_dir.trim().is_empty() {
         return None;
     }
@@ -47,7 +47,7 @@ mod tests {
 
     #[test]
     fn portatil_fica_ao_lado_do_executavel() {
-        let dir = PathBuf::from("/media/pendrive/OmniGet/data");
+        let dir = PathBuf::from("/media/pendrive/LibreGet/data");
         let got = portable_webview_dir(Some(&dir)).expect("portatil tem diretorio");
         assert_eq!(got, dir.join("webview"));
         // O ponto da issue #195: nada pode acabar sob o perfil do usuario.
@@ -56,10 +56,10 @@ mod tests {
 
     #[test]
     fn caminho_com_espaco_sobrevive() {
-        // Windows portatil vive em "C:\Users\x\Downloads\OmniGet 0.7.7\data".
-        let dir = PathBuf::from("C:/Users/x/Downloads/OmniGet 0.7.7/data");
+        // Windows portatil vive em "C:\Users\x\Downloads\LibreGet 0.7.7\data".
+        let dir = PathBuf::from("C:/Users/x/Downloads/LibreGet 0.7.7/data");
         let got = portable_webview_dir(Some(&dir)).expect("portatil tem diretorio");
-        assert!(got.to_string_lossy().contains("OmniGet 0.7.7"));
+        assert!(got.to_string_lossy().contains("LibreGet 0.7.7"));
         assert!(got.ends_with("webview"));
     }
 
@@ -69,39 +69,39 @@ mod tests {
         // rodam em paralelo. Nenhum outro teste toca estas duas variaveis, mas
         // dividir isto em varios seria corrida garantida.
         let restore = (
-            std::env::var("OMNIGET_PORTABLE").ok(),
-            std::env::var("OMNIGET_DATA_DIR").ok(),
+            std::env::var("LIBREGET_PORTABLE").ok(),
+            std::env::var("LIBREGET_DATA_DIR").ok(),
         );
 
-        std::env::remove_var("OMNIGET_PORTABLE");
-        std::env::remove_var("OMNIGET_DATA_DIR");
+        std::env::remove_var("LIBREGET_PORTABLE");
+        std::env::remove_var("LIBREGET_DATA_DIR");
         assert_eq!(
             portable_webview_dir_from_env(),
             None,
             "sem env nao e portatil"
         );
 
-        std::env::set_var("OMNIGET_PORTABLE", "1");
+        std::env::set_var("LIBREGET_PORTABLE", "1");
         assert_eq!(
             portable_webview_dir_from_env(),
             None,
             "portatil sem data dir nao pode inventar caminho"
         );
 
-        std::env::set_var("OMNIGET_DATA_DIR", "   ");
+        std::env::set_var("LIBREGET_DATA_DIR", "   ");
         assert_eq!(
             portable_webview_dir_from_env(),
             None,
             "data dir em branco nao pode virar caminho relativo"
         );
 
-        std::env::set_var("OMNIGET_DATA_DIR", "/tmp/omniget-portatil/data");
+        std::env::set_var("LIBREGET_DATA_DIR", "/tmp/libreget-portatil/data");
         assert_eq!(
             portable_webview_dir_from_env(),
-            Some(PathBuf::from("/tmp/omniget-portatil/data/webview"))
+            Some(PathBuf::from("/tmp/libreget-portatil/data/webview"))
         );
 
-        std::env::set_var("OMNIGET_PORTABLE", "0");
+        std::env::set_var("LIBREGET_PORTABLE", "0");
         assert_eq!(
             portable_webview_dir_from_env(),
             None,
@@ -109,12 +109,12 @@ mod tests {
         );
 
         match restore.0 {
-            Some(v) => std::env::set_var("OMNIGET_PORTABLE", v),
-            None => std::env::remove_var("OMNIGET_PORTABLE"),
+            Some(v) => std::env::set_var("LIBREGET_PORTABLE", v),
+            None => std::env::remove_var("LIBREGET_PORTABLE"),
         }
         match restore.1 {
-            Some(v) => std::env::set_var("OMNIGET_DATA_DIR", v),
-            None => std::env::remove_var("OMNIGET_DATA_DIR"),
+            Some(v) => std::env::set_var("LIBREGET_DATA_DIR", v),
+            None => std::env::remove_var("LIBREGET_DATA_DIR"),
         }
     }
 }
@@ -186,7 +186,7 @@ mod runtime_fixo_tests {
     }
 
     fn tempdir(tag: &str) -> PathBuf {
-        let d = std::env::temp_dir().join(format!("omniget-rt-{tag}-{}", std::process::id()));
+        let d = std::env::temp_dir().join(format!("libreget-rt-{tag}-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&d);
         std::fs::create_dir_all(&d).expect("cria tempdir");
         d
@@ -195,7 +195,7 @@ mod runtime_fixo_tests {
     #[test]
     fn sem_runtime_ao_lado_nao_inventa_caminho() {
         let d = tempdir("vazio");
-        std::fs::write(d.join("omniget.exe"), b"stub").expect("cria exe");
+        std::fs::write(d.join("libreget.exe"), b"stub").expect("cria exe");
         assert_eq!(find_fixed_runtime(&d), None);
         let _ = std::fs::remove_dir_all(&d);
     }
@@ -270,7 +270,7 @@ pub fn startup_banner(version: &str, pid: u32, portable: bool, data_dir: Option<
     let dir = data_dir
         .map(|d| d.display().to_string())
         .unwrap_or_else(|| "<unresolved>".to_string());
-    format!("OmniGet {version} starting — pid {pid}, {modo} mode, data dir {dir}")
+    format!("LibreGet {version} starting — pid {pid}, {modo} mode, data dir {dir}")
 }
 
 #[cfg(test)]
@@ -280,7 +280,7 @@ mod banner_tests {
     #[test]
     fn banner_nomeia_o_modo_e_o_diretorio() {
         let b = startup_banner("0.7.7", 1234, true, Some(Path::new("/pendrive/data")));
-        assert!(b.contains("0.7.7"));
+        assert!(b.contains("LibreGet 0.7.7"));
         assert!(b.contains("pid 1234"));
         assert!(b.contains("portable mode"));
         assert!(b.contains("/pendrive/data"));

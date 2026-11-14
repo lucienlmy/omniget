@@ -3,7 +3,7 @@ pub mod platforms;
 pub mod settings_helper;
 pub mod state;
 
-use omniget_plugin_sdk::{OmnigetPlugin, PluginHost};
+use libreget_plugin_sdk::{LibregetPlugin, PluginHost};
 use state::TelegramPluginState;
 use std::sync::Arc;
 
@@ -27,11 +27,11 @@ impl TelegramPlugin {
     }
 }
 
-pub fn manifest() -> omniget_plugin_sdk::PluginManifest {
+pub fn manifest() -> libreget_plugin_sdk::PluginManifest {
     serde_json::from_str(include_str!("../plugin.json")).expect("valid telegram manifest")
 }
 
-impl OmnigetPlugin for TelegramPlugin {
+impl LibregetPlugin for TelegramPlugin {
     fn id(&self) -> &str {
         "telegram"
     }
@@ -1242,7 +1242,7 @@ impl OmnigetPlugin for TelegramPlugin {
                     let chat = platforms::telegram::api::create_channel_or_folder(
                         &state.telegram_session,
                         &title,
-                        "OmniGet Drive Folder",
+                        "LibreGet Drive Folder",
                         false,
                     )
                     .await

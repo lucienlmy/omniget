@@ -61,7 +61,7 @@ fn build_client(token: &str) -> anyhow::Result<reqwest::Client> {
     headers.insert("Origin", HeaderValue::from_static("https://greenn.club"));
     headers.insert("Referer", HeaderValue::from_static("https://greenn.club/"));
 
-    let client = omniget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
+    let client = libreget_core::core::http_client::apply_global_proxy(reqwest::Client::builder())
         .user_agent(USER_AGENT)
         .default_headers(headers)
         .redirect(reqwest::redirect::Policy::limited(10))
@@ -73,8 +73,7 @@ fn build_client(token: &str) -> anyhow::Result<reqwest::Client> {
 }
 
 fn session_file_path() -> anyhow::Result<PathBuf> {
-    let data_dir = dirs::data_dir().ok_or_else(|| anyhow!("Could not find app data directory"))?;
-    Ok(data_dir.join("omniget").join("greenn_session.json"))
+    crate::platforms::session_file("greenn_session.json")
 }
 
 pub async fn validate_token(session: &GreennSession) -> anyhow::Result<bool> {

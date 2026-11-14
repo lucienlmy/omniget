@@ -43,7 +43,7 @@ twitch-downloader, subtitle-downloader, epub-reader, spaced-repetition
   <a href="https://github.com/OpenSelena/libreget/stargazers"><img src="https://img.shields.io/github/stars/OpenSelena/libreget?style=for-the-badge&color=FFD426" alt="GitHub stars" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-2AA845?style=for-the-badge" alt="License GPL-3.0" /></a>
   <a href="https://t.me/OpenSelena"><img src="https://img.shields.io/badge/Telegram-channel-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram channel" /></a>
-  <a href="https://hosted.weblate.org/engage/libreget-openselena/"><img src="https://hosted.weblate.org/widget/libreget-openselena/frontend/svg-badge.svg" alt="Translation status" /></a>
+  <a href="https://hosted.weblate.org/engage/libreget/"><img src="https://hosted.weblate.org/widget/libreget/frontend/svg-badge.svg" alt="Translation status" /></a>
 </p>
 
 <p align="center">
@@ -712,7 +712,7 @@ pnpm tauri build --config '{"bundle":{"createUpdaterArtifacts":false}}'
 
 バグ報告とプルリクエストは [Issues](https://github.com/OpenSelena/libreget/issues) と [Pull requests](https://github.com/OpenSelena/libreget/pulls) にお願いします。質問やちょっとしたヘルプは [Telegram](https://t.me/OpenSelena) で受け付けています。セキュリティに関する問い合わせや脆弱性の報告：[SECURITY.md](SECURITY.md) または [igect@vk.com](mailto:igect@vk.com)。
 
-翻訳は [Weblate](https://hosted.weblate.org/engage/libreget-openselena/) で管理しています。言語を選んで、ブラウザ上で翻訳してください。新しい文字列は、`main` に取り込まれてから数時間後にそこに表示されます。
+翻訳は [Weblate](https://hosted.weblate.org/engage/libreget/) で管理しています。言語を選んで、ブラウザ上で翻訳してください。新しい文字列は、`main` に取り込まれてから数時間後にそこに表示されます。
 
 LibreGet は、[yt-dlp](https://github.com/yt-dlp/yt-dlp)、[FFmpeg](https://ffmpeg.org/)、[gallery-dl](https://github.com/mikf/gallery-dl)、[whisper.cpp](https://github.com/ggerganov/whisper.cpp)、[aria2](https://aria2.github.io/)、[SponsorBlock](https://sponsor.ajay.app/)、[Return YouTube Dislike](https://returnyoutubedislike.com/)、[FxTwitter](https://github.com/FixTweet/FxTwitter)、[Spicetify](https://spicetify.app/)、[cat-catch](https://github.com/xifangczy/cat-catch)（拡張機能のメディアスニッファーの一部）、[Tauri](https://tauri.app/) の上に作られています。これらをメンテナンスしているすべての方に感謝します。
 

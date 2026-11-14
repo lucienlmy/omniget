@@ -206,7 +206,7 @@ pub(crate) mod fixture {
                 "Profile.csv",
                 concat!(
                     "First Name,Last Name,Headline,Summary,Industry,Geo Location,Websites\n",
-                    "OpenSelena,Dev,\"Dev de Rust e Svelte que gosta de ferramenta local\",\"Trabalho com aplicativos de desktop ha dez anos.\",Software Development,\"Sao Paulo, Brasil\",[MY_WEBSITE:https://libreget.nav.bd]\n"
+                    "OpenSelena,Dev,\"Dev de Rust e Svelte que gosta de ferramenta local\",\"Trabalho com aplicativos de desktop ha dez anos.\",Software Development,\"Sao Paulo, Brasil\",[MY_WEBSITE:https://libreget.asf.sale]\n"
                 )
                 .to_string(),
             ),

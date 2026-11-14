@@ -27,7 +27,7 @@ leitor pdf, flashcards anki, repetição espaçada, player de música, spicetify
 </p>
 
 <p align="center">
-  <a href="https://libreget.nav.bd/"><img src="https://img.shields.io/badge/Website-libreget.nav.bd-FF7D38?style=for-the-badge" alt="Site da comunidade" /></a>
+  <a href="https://libreget.asf.sale/"><img src="https://img.shields.io/badge/Website-libreget.asf.sale-FF7D38?style=for-the-badge" alt="Site da comunidade" /></a>
   <a href="https://github.com/OpenSelena/libreget/releases/latest"><img src="https://img.shields.io/github/v/release/OpenSelena/libreget?style=for-the-badge&label=release&color=F28500" alt="Última versão" /></a>
   <a href="https://github.com/OpenSelena/libreget/releases"><img src="https://img.shields.io/github/downloads/OpenSelena/libreget/total?style=for-the-badge&label=downloads&color=1E6FE8" alt="Total de downloads" /></a>
   <a href="https://github.com/OpenSelena/libreget/stargazers"><img src="https://img.shields.io/github/stars/OpenSelena/libreget?style=for-the-badge&color=FFD426" alt="Estrelas no GitHub" /></a>

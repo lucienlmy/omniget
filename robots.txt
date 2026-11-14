@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://libreget.nav.bd/sitemap.xml
+Sitemap: https://libreget.asf.sale/sitemap.xml

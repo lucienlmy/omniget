@@ -147,7 +147,7 @@ jobs:
 
             ### Code signing policy
 
-            Free code signing provided by [SignPath.io](https://about.signpath.io), certificate by [SignPath Foundation](https://signpath.org). Code changes and signed releases are reviewed and approved by the OpenSelena maintainers. See our [Privacy Policy](https://libreget.nav.bd/docs/#privacy).
+            Free code signing provided by [SignPath.io](https://about.signpath.io), certificate by [SignPath Foundation](https://signpath.org). Code changes and signed releases are reviewed and approved by the OpenSelena maintainers. See our [Privacy Policy](https://libreget.asf.sale/docs/#privacy).
           releaseDraft: true
           prerelease: false
           includeUpdaterJson: false

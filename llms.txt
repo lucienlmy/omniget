@@ -11,7 +11,7 @@ Plugins: Courses, Study (course player with timestamped notes, PDF/EPUB/CBZ read
 ## Key facts
 
 - Name: LibreGet
-- Community Website: https://libreget.nav.bd/
+- Community Website: https://libreget.asf.sale/
 - Repository: https://github.com/OpenSelena/libreget (Maintained by Igect under GPL-3.0)
 - Maintainer: Igect
 - License: GPL-3.0

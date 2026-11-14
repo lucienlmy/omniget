@@ -37,7 +37,7 @@ twitch-downloader, subtitle-downloader, epub-reader, spaced-repetition
 </p>
 
 <p align="center">
-  <a href="https://libreget.nav.bd/"><img src="https://img.shields.io/badge/Website-libreget.nav.bd-FF7D38?style=for-the-badge" alt="Community Website" /></a>
+  <a href="https://libreget.asf.sale/"><img src="https://img.shields.io/badge/Website-libreget.asf.sale-FF7D38?style=for-the-badge" alt="Community Website" /></a>
   <a href="https://github.com/OpenSelena/libreget/releases/latest"><img src="https://img.shields.io/github/v/release/OpenSelena/libreget?style=for-the-badge&label=release&color=F28500" alt="Latest release" /></a>
   <a href="https://github.com/OpenSelena/libreget/releases"><img src="https://img.shields.io/github/downloads/OpenSelena/libreget/total?style=for-the-badge&label=downloads&color=1E6FE8" alt="Total downloads" /></a>
   <a href="https://github.com/OpenSelena/libreget/stargazers"><img src="https://img.shields.io/github/stars/OpenSelena/libreget?style=for-the-badge&color=FFD426" alt="GitHub stars" /></a>
@@ -606,7 +606,7 @@ LibreGet がダウンロードするのは、あなた自身のログインセ�
 
 Windows での無料のコード署名は [SignPath.io](https://about.signpath.io) が提供し、証明書は [SignPath Foundation](https://signpath.org) によるものです。
 
-コードの変更と署名付きのリリースは、OpenSelena のメンテナーがレビューし、承認しています。LibreGet がデータをどのように扱うかについては、[プライバシーと LibreGet がしないこと](#プライバシーと-libreget-がしないこと) と [プライバシーに関するドキュメント](https://libreget.nav.bd/docs/#privacy) をご覧ください。
+コードの変更と署名付きのリリースは、OpenSelena のメンテナーがレビューし、承認しています。LibreGet がデータをどのように扱うかについては、[プライバシーと LibreGet がしないこと](#プライバシーと-libreget-がしないこと) と [プライバシーに関するドキュメント](https://libreget.asf.sale/docs/#privacy) をご覧ください。
 
 ---
 
